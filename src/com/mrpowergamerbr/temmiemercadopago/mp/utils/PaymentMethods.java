@@ -1,5 +1,5 @@
 
-package com.mrpowergamerbr.temmiemercadopago.internal.autogen;
+package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import java.util.List;
 import com.google.gson.annotations.Expose;

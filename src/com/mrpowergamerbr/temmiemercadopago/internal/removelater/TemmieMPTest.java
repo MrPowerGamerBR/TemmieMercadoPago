@@ -6,9 +6,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import com.mrpowergamerbr.temmiemercadopago.TemmieMercadoPago;
-import com.mrpowergamerbr.temmiemercadopago.mp.CurrencyIdentifier;
 import com.mrpowergamerbr.temmiemercadopago.mp.Payment;
-import com.mrpowergamerbr.temmiemercadopago.mp.TemmiePayment;
+import com.mrpowergamerbr.temmiemercadopago.mp.TemmieItem;
+import com.mrpowergamerbr.temmiemercadopago.mp.response.SearchResultResponse;
+import com.mrpowergamerbr.temmiemercadopago.mp.utils.Result;
 
 public class TemmieMPTest {
 	public static void main(String[] args) {
@@ -35,8 +36,16 @@ public class TemmieMPTest {
 		TemmieMercadoPago temmie = new TemmieMercadoPago(clientId, clientToken);
 		temmie.getAccessToken();
 		
-		Payment payment = temmie.generatePayment(new TemmiePayment("Test", 1, 1, CurrencyIdentifier.BRASIL));
+		Payment payment = temmie.generatePayment(new TemmieItem("SparklyPower - Alguma Coisa", 1, 1));
 		
-		System.out.println(payment.getInitPoint());
+		System.out.println(payment.getSandboxInitPoint());
+		
+		System.out.println(payment.getItems().get(0).getTitle());
+		
+		SearchResultResponse srr = temmie.searchAllPayments();
+		
+		for (Result result : srr.getResults()) {
+			System.out.println(result.collection.getReason());
+		}
 	}
 }
