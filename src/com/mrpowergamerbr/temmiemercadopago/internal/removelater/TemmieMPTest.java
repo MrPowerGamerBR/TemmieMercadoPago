@@ -6,6 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import com.mrpowergamerbr.temmiemercadopago.TemmieMercadoPago;
+import com.mrpowergamerbr.temmiemercadopago.mp.CurrencyIdentifier;
+import com.mrpowergamerbr.temmiemercadopago.mp.Payment;
+import com.mrpowergamerbr.temmiemercadopago.mp.TemmiePayment;
 
 public class TemmieMPTest {
 	public static void main(String[] args) {
@@ -31,5 +34,9 @@ public class TemmieMPTest {
 		
 		TemmieMercadoPago temmie = new TemmieMercadoPago(clientId, clientToken);
 		temmie.getAccessToken();
+		
+		Payment payment = temmie.generatePayment(new TemmiePayment("Test", 1, 1, CurrencyIdentifier.BRASIL));
+		
+		System.out.println(payment.getInitPoint());
 	}
 }

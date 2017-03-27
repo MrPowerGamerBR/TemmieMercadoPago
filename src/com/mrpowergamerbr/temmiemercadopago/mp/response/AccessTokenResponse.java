@@ -1,4 +1,4 @@
-package com.mrpowergamerbr.temmiemercadopago.response;
+package com.mrpowergamerbr.temmiemercadopago.mp.response;
 
 import com.google.gson.annotations.SerializedName;
 
