@@ -45,7 +45,7 @@ public class TemmieMPTest {
 		SearchResultResponse srr = temmie.searchAllPayments();
 		
 		for (Result result : srr.getResults()) {
-			System.out.println(result.collection.getReason());
+			System.out.println(result.getCollection().getReason());
 		}
 	}
 }

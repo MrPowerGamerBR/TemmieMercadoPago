@@ -4,10 +4,11 @@ package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+import lombok.Getter;
 
+@Getter
+public class Result {
     @SerializedName("collection")
     @Expose
-    public Collection collection;
-
+    private Collection collection;
 }
