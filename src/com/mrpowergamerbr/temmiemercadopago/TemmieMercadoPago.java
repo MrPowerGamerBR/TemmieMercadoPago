@@ -69,7 +69,6 @@ public class TemmieMercadoPago {
 				.send(gson.toJson(request))
 				.body();
 
-		System.out.println(response);
 		Payment realPayment = gson.fromJson(response, Payment.class);
 
 		return realPayment;
