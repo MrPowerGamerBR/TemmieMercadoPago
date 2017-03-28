@@ -17,9 +17,15 @@ import com.mrpowergamerbr.temmiemercadopago.mp.request.PaymentRequest;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.AccessTokenResponse;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.ErrorResponse;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.SearchResultResponse;
+import com.mrpowergamerbr.temmiemercadopago.mp.utils.AccountInfo;
 
 import lombok.*;
 
+/**
+ * MercadoPago unofficial integration library
+ * 
+ * @author MrPowerGamerBR
+ */
 public class TemmieMercadoPago {
 	@Getter
 	public static final Gson gson = new Gson();
@@ -30,6 +36,11 @@ public class TemmieMercadoPago {
 	@Setter
 	private String clientToken;
 
+	/**
+	 * Initialize a TemmieMercadoPago Client with credientials
+	 * @param clientId
+	 * @param clientToken
+	 */
 	public TemmieMercadoPago(String clientId, String clientToken) {
 		this.clientId = clientId;
 		this.clientToken = clientToken;
@@ -128,6 +139,15 @@ public class TemmieMercadoPago {
 		return psr;
 	}
 
+	public AccountInfo getAccountInfo() {
+		String response = HttpRequest.get(Endpoints.MP_API_URL + "/users/me?access_token=" + getAccessToken())
+				.acceptJson()
+				.contentType("application/json")
+				.body();
+		
+		return gson.fromJson(response, AccountInfo.class);
+	}
+	
 	private String buildQuery(Map<String, Object> params) {
 		String[] query = new String[params.size()];
 		int index = 0;

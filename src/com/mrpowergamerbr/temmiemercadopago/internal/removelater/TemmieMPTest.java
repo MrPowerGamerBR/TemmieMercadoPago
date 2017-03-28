@@ -9,6 +9,7 @@ import com.mrpowergamerbr.temmiemercadopago.TemmieMercadoPago;
 import com.mrpowergamerbr.temmiemercadopago.mp.Payment;
 import com.mrpowergamerbr.temmiemercadopago.mp.TemmieItem;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.SearchResultResponse;
+import com.mrpowergamerbr.temmiemercadopago.mp.utils.AccountInfo;
 import com.mrpowergamerbr.temmiemercadopago.mp.utils.Result;
 
 public class TemmieMPTest {
@@ -34,18 +35,17 @@ public class TemmieMPTest {
 		}
 		
 		TemmieMercadoPago temmie = new TemmieMercadoPago(clientId, clientToken);
-		temmie.getAccessToken();
 		
-		Payment payment = temmie.generatePayment(new TemmieItem("SparklyPower - Alguma Coisa", 1, 1));
+		AccountInfo accInfo = temmie.getAccountInfo();
 		
-		System.out.println(payment.getSandboxInitPoint());
+		System.out.println(accInfo.getFirstName());
 		
-		System.out.println(payment.getItems().get(0).getTitle());
+		System.out.println(accInfo.getSiteId());
 		
-		SearchResultResponse srr = temmie.searchAllPayments();
+		System.out.println(accInfo.getNickname());
 		
-		for (Result result : srr.getResults()) {
-			System.out.println(result.getCollection().getReason());
-		}
+		System.out.println(accInfo.getSellerExperience());
+		
+		System.out.println(accInfo.getPermalink());
 	}
 }
