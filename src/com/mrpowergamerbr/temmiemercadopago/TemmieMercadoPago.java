@@ -41,9 +41,7 @@ public class TemmieMercadoPago {
 				.part("client_id", this.getClientId())
 				.part("client_secret", this.getClientToken())
 				.body();
-
-		System.out.println(json);
-
+		
 		AccessTokenResponse response = gson.fromJson(json, AccessTokenResponse.class);
 
 		if (response.getAccessToken() == null) {
