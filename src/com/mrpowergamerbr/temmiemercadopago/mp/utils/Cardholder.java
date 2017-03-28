@@ -1,16 +1,16 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Cardholder {
+import lombok.Getter;
 
+@Getter
+public class Cardholder {
     @SerializedName("name")
     @Expose
-    public Object name;
+    private Object name;
     @SerializedName("identification")
     @Expose
-    public Identification identification;
-
+    private Identification identification;
 }

@@ -1,11 +1,12 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Address {
+import lombok.Getter;
 
+@Getter
+public class Address {
     @SerializedName("street_name")
     @Expose
     private String streetName;
@@ -15,29 +16,4 @@ public class Address {
     @SerializedName("zip_code")
     @Expose
     private String zipCode;
-
-    public String getStreetName() {
-        return streetName;
-    }
-
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
-    public Object getStreetNumber() {
-        return streetNumber;
-    }
-
-    public void setStreetNumber(Object streetNumber) {
-        this.streetNumber = streetNumber;
-    }
-
-    public String getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
-    }
-
 }

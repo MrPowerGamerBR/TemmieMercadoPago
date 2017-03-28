@@ -120,7 +120,7 @@ public class TemmieMercadoPago {
 
 	private SearchResultResponse searchAllPayments(Map<String, Object> filters, String country, int offset) {
 		SearchResultResponse psr = searchPayments(filters, country, 0, 1000);
-		if (psr.getPaging().total >= offset) {
+		if (psr.getPaging().getTotal() >= offset) {
 			offset = offset + 1000;
 			SearchResultResponse aux = searchPayments(filters, country, offset, 1000);
 			psr.getResults().addAll(aux.getResults());

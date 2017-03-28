@@ -1,19 +1,19 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Paging {
+import lombok.Getter;
 
+@Getter
+public class Paging {
     @SerializedName("total")
     @Expose
-    public Integer total;
+    private Integer total;
     @SerializedName("limit")
     @Expose
-    public Integer limit;
+    private Integer limit;
     @SerializedName("offset")
     @Expose
-    public Integer offset;
-
+    private Integer offset;
 }

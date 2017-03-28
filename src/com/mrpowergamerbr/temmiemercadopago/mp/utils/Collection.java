@@ -1,4 +1,3 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import java.util.List;
@@ -9,7 +8,6 @@ import lombok.Getter;
 
 @Getter 
 public class Collection {
-
     @SerializedName("id")
     @Expose
     private long id;
