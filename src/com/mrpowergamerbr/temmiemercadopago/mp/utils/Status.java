@@ -1,49 +1,49 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Status {
+import lombok.Getter;
 
+@Getter
+public class Status {
     @SerializedName("site_status")
     @Expose
-    public String siteStatus;
+    private String siteStatus;
     @SerializedName("list")
     @Expose
-    public List list;
+    private List list;
     @SerializedName("buy")
     @Expose
-    public Buy buy;
+    private Buy buy;
     @SerializedName("sell")
     @Expose
-    public Sell sell;
+    private Sell sell;
     @SerializedName("billing")
     @Expose
-    public Billing billing;
+    private Billing billing;
     @SerializedName("mercadopago_tc_accepted")
     @Expose
-    public Boolean mercadopagoTcAccepted;
+    private Boolean mercadopagoTcAccepted;
     @SerializedName("mercadopago_account_type")
     @Expose
-    public String mercadopagoAccountType;
+    private String mercadopagoAccountType;
     @SerializedName("mercadoenvios")
     @Expose
-    public String mercadoenvios;
+    private String mercadoenvios;
     @SerializedName("shopping_cart")
     @Expose
-    public ShoppingCart shoppingCart;
+    private ShoppingCart shoppingCart;
     @SerializedName("immediate_payment")
     @Expose
-    public Boolean immediatePayment;
+    private Boolean immediatePayment;
     @SerializedName("confirmed_email")
     @Expose
-    public Boolean confirmedEmail;
+    private Boolean confirmedEmail;
     @SerializedName("user_type")
     @Expose
-    public String userType;
+    private String userType;
     @SerializedName("required_action")
     @Expose
-    public String requiredAction;
-
+    private String requiredAction;
 }

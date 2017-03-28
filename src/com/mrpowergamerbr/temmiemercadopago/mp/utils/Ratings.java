@@ -1,19 +1,19 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Ratings {
+import lombok.Getter;
 
+@Getter
+public class Ratings {
     @SerializedName("positive")
     @Expose
-    public Integer positive;
+    private Integer positive;
     @SerializedName("negative")
     @Expose
-    public Integer negative;
+    private Integer negative;
     @SerializedName("neutral")
     @Expose
-    public Integer neutral;
-
+    private Integer neutral;
 }

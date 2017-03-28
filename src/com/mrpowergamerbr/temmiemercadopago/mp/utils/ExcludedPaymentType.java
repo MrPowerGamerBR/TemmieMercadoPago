@@ -7,7 +7,6 @@ import lombok.Getter;
 
 @Getter
 public class ExcludedPaymentType {
-
     @SerializedName("id")
     @Expose
     private String id;

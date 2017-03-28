@@ -1,20 +1,21 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Sell {
+import lombok.Getter;
 
+@Getter
+public class Sell {
     @SerializedName("allow")
     @Expose
-    public Boolean allow;
+    private Boolean allow;
     @SerializedName("codes")
     @Expose
-    public List<Object> codes = null;
+    private List<Object> codes = null;
     @SerializedName("immediate_payment")
     @Expose
-    public ImmediatePayment immediatePayment;
-
+    private ImmediatePayment immediatePayment;
 }

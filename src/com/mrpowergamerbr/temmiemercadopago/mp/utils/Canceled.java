@@ -1,16 +1,16 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Canceled {
+import lombok.Getter;
 
+@Getter
+public class Canceled {
     @SerializedName("total")
     @Expose
-    public Object total;
+    private Object total;
     @SerializedName("paid")
     @Expose
-    public Object paid;
-
+    private Object paid;
 }

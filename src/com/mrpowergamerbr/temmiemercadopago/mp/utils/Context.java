@@ -1,19 +1,19 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Context {
+import lombok.Getter;
 
+@Getter
+public class Context {
     @SerializedName("source")
     @Expose
-    public String source;
+    private String source;
     @SerializedName("flow")
     @Expose
-    public Object flow;
+    private Object flow;
     @SerializedName("device")
     @Expose
-    public Object device;
-
+    private Object device;
 }

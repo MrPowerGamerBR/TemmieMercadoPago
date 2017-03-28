@@ -1,19 +1,19 @@
-
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Metrics {
+import lombok.Getter;
 
+@Getter
+public class Metrics {
     @SerializedName("sales")
     @Expose
-    public Sales sales;
+    private Sales sales;
     @SerializedName("claims")
     @Expose
-    public Claims claims;
+    private Claims claims;
     @SerializedName("delayed_handling_time")
     @Expose
-    public DelayedHandlingTime delayedHandlingTime;
-
+    private DelayedHandlingTime delayedHandlingTime;
 }

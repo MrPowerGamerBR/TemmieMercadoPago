@@ -9,5 +9,5 @@ import lombok.Getter;
 public class BillData {
     @SerializedName("accept_credit_note")
     @Expose
-    public Object acceptCreditNote;
+    private Object acceptCreditNote;
 }
