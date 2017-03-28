@@ -3,11 +3,14 @@ package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.mrpowergamerbr.temmiemercadopago.internal.PostProcessingEnabler.PostProcessable;
+import com.mrpowergamerbr.temmiemercadopago.mp.PaymentStatus;
 
 import lombok.Getter;
+import lombok.AccessLevel;
 
 @Getter 
-public class Collection {
+public class Collection implements PostProcessable {
     @SerializedName("id")
     @Expose
     private long id;
@@ -85,7 +88,8 @@ public class Collection {
     private Integer financeFee;
     @SerializedName("status")
     @Expose
-    private String status;
+    @Getter(AccessLevel.NONE)
+    private String internalStatus;
     @SerializedName("status_detail")
     @Expose
     private String statusDetail;
@@ -140,5 +144,18 @@ public class Collection {
     @SerializedName("transaction_order_id")
     @Expose
     private String transactionOrderId;
+    
+    // ======[ TEMMIEMERCADOPAGO ]======
+    @Getter(AccessLevel.NONE)
+    private PaymentStatus temmieStatus;
+    
+    public PaymentStatus getStatus() {
+    	return temmieStatus;
+    }
+    
+	@Override
+	public void postProcess() {
+		this.temmieStatus = PaymentStatus.getPaymentStatusByMPStatus(internalStatus);
+	}
 
 }

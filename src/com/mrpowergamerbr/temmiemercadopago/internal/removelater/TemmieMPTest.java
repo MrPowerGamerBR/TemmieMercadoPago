@@ -36,16 +36,10 @@ public class TemmieMPTest {
 		
 		TemmieMercadoPago temmie = new TemmieMercadoPago(clientId, clientToken);
 		
-		AccountInfo accInfo = temmie.getAccountInfo();
+		SearchResultResponse ssr = temmie.searchPayments();
 		
-		System.out.println(accInfo.getFirstName());
-		
-		System.out.println(accInfo.getSiteId());
-		
-		System.out.println(accInfo.getNickname());
-		
-		System.out.println(accInfo.getSellerExperience());
-		
-		System.out.println(accInfo.getPermalink());
+		for (Result result : ssr.getResults()) {
+			System.out.println(result.getCollection().getStatus());
+		}
 	}
 }

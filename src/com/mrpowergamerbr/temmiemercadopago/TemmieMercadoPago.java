@@ -9,8 +9,10 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.github.kevinsawicki.http.HttpRequest;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.mrpowergamerbr.temmiemercadopago.exception.MercadoPagoException;
 import com.mrpowergamerbr.temmiemercadopago.internal.Endpoints;
+import com.mrpowergamerbr.temmiemercadopago.internal.PostProcessingEnabler;
 import com.mrpowergamerbr.temmiemercadopago.mp.Payment;
 import com.mrpowergamerbr.temmiemercadopago.mp.TemmieItem;
 import com.mrpowergamerbr.temmiemercadopago.mp.request.PaymentRequest;
@@ -28,7 +30,7 @@ import lombok.*;
  */
 public class TemmieMercadoPago {
 	@Getter
-	public static final Gson gson = new Gson();
+	public static final Gson gson = new GsonBuilder().registerTypeAdapterFactory(new PostProcessingEnabler()).create();
 	@Getter
 	@Setter
 	private String clientId;
@@ -144,8 +146,6 @@ public class TemmieMercadoPago {
 				.acceptJson()
 				.contentType("application/json")
 				.body();
-		
-		System.out.println(response);
 		
 		return gson.fromJson(response, AccountInfo.class);
 	}
