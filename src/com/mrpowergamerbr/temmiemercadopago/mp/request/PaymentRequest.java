@@ -1,6 +1,7 @@
 package com.mrpowergamerbr.temmiemercadopago.mp.request;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
@@ -51,12 +52,19 @@ public class PaymentRequest {
 	float marketplace_fee;
 	@SerializedName("differential_pricing")
 	DifferentialPricing differentialPricing;
+	private HashMap<String, String> metadata = new HashMap<String, String>();
 	
 	public static class PaymentRequestBuilder {
 		List<TemmieItem> items = new ArrayList<TemmieItem>();
+		HashMap<String, String> metadata = new HashMap<String, String>();
 		
 		public PaymentRequestBuilder addItem(TemmieItem item) {
 			items.add(item);
+			return this;
+		}
+		
+		public PaymentRequestBuilder addMetadata(String key, String value) {
+			metadata.put(key, value);
 			return this;
 		}
 	}

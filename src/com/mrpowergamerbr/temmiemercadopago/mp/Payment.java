@@ -1,5 +1,6 @@
 package com.mrpowergamerbr.temmiemercadopago.mp;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
@@ -76,4 +77,6 @@ public class Payment {
 	@SerializedName("sandbox_init_point")
 	@Expose
 	private String sandboxInitPoint;
+	@SerializedName("metadata")
+	private HashMap<String, String> metadata = new HashMap<String, String>();
 }

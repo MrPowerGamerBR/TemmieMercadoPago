@@ -1,5 +1,6 @@
 package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 
+import java.util.HashMap;
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -40,10 +41,10 @@ public class Collection implements PostProcessable {
     private Object sponsorId;
     @SerializedName("payer")
     @Expose
-    private Payer payer;
+    private PaymentPayer payer;
     @SerializedName("external_reference")
     @Expose
-    private Object externalReference;
+    private String externalReference;
     @SerializedName("merchant_order_id")
     @Expose
     private Integer merchantOrderId;
@@ -140,10 +141,11 @@ public class Collection implements PostProcessable {
     private Object notificationUrl;
     @SerializedName("internal_metadata")
     @Expose
-    private InternalMetadata internalMetadata;
+    private HashMap<String, String> internalMetadata;
     @SerializedName("transaction_order_id")
     @Expose
     private String transactionOrderId;
+    private HashMap<String, String> metadata = new HashMap<String, String>();
     
     // ======[ TEMMIEMERCADOPAGO ]======
     @Getter(AccessLevel.NONE)

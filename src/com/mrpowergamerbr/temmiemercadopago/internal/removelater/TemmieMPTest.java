@@ -12,6 +12,8 @@ import com.mrpowergamerbr.temmiemercadopago.mp.TemmieItem;
 import com.mrpowergamerbr.temmiemercadopago.mp.request.PaymentRequest;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.SearchResultResponse;
 import com.mrpowergamerbr.temmiemercadopago.mp.utils.BackUrls;
+import com.mrpowergamerbr.temmiemercadopago.mp.utils.Identification;
+import com.mrpowergamerbr.temmiemercadopago.mp.utils.Payer;
 import com.mrpowergamerbr.temmiemercadopago.mp.utils.Result;
 
 public class TemmieMPTest {
@@ -41,25 +43,20 @@ public class TemmieMPTest {
 		Payment payment = temmie.generatePayment(PaymentRequest.builder()
 				.addItem(
 						TemmieItem.builder()
-						.title("Algum Item Muito Top")
-						.unitPrice(0.99)
-						.quantity(1)
+						.title("1000 Granas") // Nome do pagamento
+						.unitPrice(0.99) // Preço
+						.quantity(1) // Quantidade
+						.categoryId("virtual_goods") // https://api.mercadopago.com/item_categories
 						.build()
 						)
-				.additionalInfo("Shantae <3")
-				.backUrls(new BackUrls("http://google.com/", "http://google.com/", "http://google.com/"))
-				.autoReturn(AutoReturnType.ALL)
+				.externalReference("MrPowerGamerBR") // Nome do player que comprou
 				.build());
 
-		System.out.println(payment.getSandboxInitPoint());
-		System.out.println(payment.getInitPoint());
+		System.out.println(payment.getInitPoint()); // Link do pagamento
 		
 		SearchResultResponse srr = temmie.searchAllPayments();
-		
-		for (Result result : srr.getResults()) {
-			System.out.println("***");
-			System.out.println(result.getCollection().getStatus());
-			System.out.println(result.getCollection().getReason());
+		for (Result r : srr.getResults()) {
+			System.out.println(r.getCollection().getExternalReference());
 		}
 	}
 }

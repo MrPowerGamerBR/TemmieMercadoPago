@@ -16,14 +16,12 @@ import com.mrpowergamerbr.temmiemercadopago.internal.Endpoints;
 import com.mrpowergamerbr.temmiemercadopago.internal.PostProcessingEnabler;
 import com.mrpowergamerbr.temmiemercadopago.mp.Payment;
 import com.mrpowergamerbr.temmiemercadopago.mp.TemmieItem;
+import com.mrpowergamerbr.temmiemercadopago.mp.TemmiePreapproval;
 import com.mrpowergamerbr.temmiemercadopago.mp.request.PaymentRequest;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.AccessTokenResponse;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.ErrorResponse;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.SearchResultResponse;
 import com.mrpowergamerbr.temmiemercadopago.mp.utils.AccountInfo;
-import com.mrpowergamerbr.temmiemercadopago.mp.utils.BackUrls;
-import com.mrpowergamerbr.temmiemercadopago.mp.utils.Payer;
-
 import lombok.*;
 
 /**
@@ -103,7 +101,6 @@ public class TemmieMercadoPago {
 		
 		Payment realPayment = gson.fromJson(response, Payment.class);
 
-		System.out.println(response);
 		return realPayment;
 	}
 	
@@ -115,7 +112,35 @@ public class TemmieMercadoPago {
 		return generatePayment(request);
 	}
 
+	// TODO: Finish this
+	public void getPaymentInfoById(long paymentId) {
+		String response = HttpRequest.get(Endpoints.MP_API_URL + "/v1/payments/" + paymentId + "?access_token=" + getAccessToken())
+				.acceptJson()
+				.contentType("application/json")
+				.body();
+
+		// Check if it is an error message
+		/* ErrorResponse errResponse = gson.fromJson(response, ErrorResponse.class);
+		
+		if (errResponse.getMessage() != null) {
+			throw new MercadoPagoException(errResponse.getMessage());
+		} */
+		
+		System.out.println(response);
+		
+		return;
+	}
+	
 	// TODO: Subscription info
+	public void generatePreapproval() {
+		String response = HttpRequest.post(Endpoints.MP_API_URL + "/v1/plans?access_token=" + getAccessToken())
+				.acceptJson()
+				.contentType("application/json")
+				.send(gson.toJson(new TemmiePreapproval()))
+				.body();
+		
+		System.out.println(response);
+	}
 	
 	public SearchResultResponse searchPayments() {
 		return searchPayments(new HashMap<String, Object>());
