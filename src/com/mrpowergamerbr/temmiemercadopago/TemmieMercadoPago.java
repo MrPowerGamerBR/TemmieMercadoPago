@@ -171,7 +171,6 @@ public class TemmieMercadoPago {
 				.contentType("application/json")
 				.body();
 
-		System.out.println(response);
 		return gson.fromJson(response, SearchResultResponse.class);
 	}
 
