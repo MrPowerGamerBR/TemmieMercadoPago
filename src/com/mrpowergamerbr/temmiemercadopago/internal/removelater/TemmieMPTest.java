@@ -40,23 +40,6 @@ public class TemmieMPTest {
 
 		TemmieMercadoPago temmie = new TemmieMercadoPago(clientId, clientToken);
 
-		Payment payment = temmie.generatePayment(PaymentRequest.builder()
-				.addItem(
-						TemmieItem.builder()
-						.title("1000 Granas") // Nome do pagamento
-						.unitPrice(0.99) // Preço
-						.quantity(1) // Quantidade
-						.categoryId("virtual_goods") // https://api.mercadopago.com/item_categories
-						.build()
-						)
-				.externalReference("MrPowerGamerBR") // Nome do player que comprou
-				.build());
-
-		System.out.println(payment.getInitPoint()); // Link do pagamento
-		
-		SearchResultResponse srr = temmie.searchAllPayments();
-		for (Result r : srr.getResults()) {
-			System.out.println(r.getCollection().getExternalReference());
-		}
+		temmie.generatePreapproval();
 	}
 }

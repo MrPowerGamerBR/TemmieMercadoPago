@@ -133,7 +133,7 @@ public class TemmieMercadoPago {
 	
 	// TODO: Subscription info
 	public void generatePreapproval() {
-		String response = HttpRequest.post(Endpoints.MP_API_URL + "/v1/plans?access_token=" + getAccessToken())
+		String response = HttpRequest.post(Endpoints.MP_API_URL + "/preapproval/?access_token=" + getAccessToken())
 				.acceptJson()
 				.contentType("application/json")
 				.send(gson.toJson(new TemmiePreapproval()))
