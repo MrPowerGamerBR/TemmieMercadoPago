@@ -8,15 +8,15 @@ import java.io.IOException;
 import com.mrpowergamerbr.temmiemercadopago.TemmieMercadoPago;
 import com.mrpowergamerbr.temmiemercadopago.mp.Payment;
 import com.mrpowergamerbr.temmiemercadopago.mp.TemmieItem;
+import com.mrpowergamerbr.temmiemercadopago.mp.request.PaymentRequest;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.SearchResultResponse;
-import com.mrpowergamerbr.temmiemercadopago.mp.utils.AccountInfo;
 import com.mrpowergamerbr.temmiemercadopago.mp.utils.Result;
 
 public class TemmieMPTest {
 	public static void main(String[] args) {
 		String clientId = null;
 		String clientToken = null;
-		try (BufferedReader br = new BufferedReader(new FileReader(new File("D:\\mp_api.txt")))) {
+		try (BufferedReader br = new BufferedReader(new FileReader(new File("X:\\mp_api.txt")))) {
 
 			String sCurrentLine;
 
@@ -36,10 +36,11 @@ public class TemmieMPTest {
 		
 		TemmieMercadoPago temmie = new TemmieMercadoPago(clientId, clientToken);
 		
-		SearchResultResponse ssr = temmie.searchPayments();
+		Payment payment = temmie.generatePayment(PaymentRequest.builder()
+				.addItem(new TemmieItem("Teste", 1, 1, "BRA"))
+				.additionalInfo("Shantae <3")
+				.build());
 		
-		for (Result result : ssr.getResults()) {
-			System.out.println(result.getCollection().getStatus());
-		}
+		System.out.println(payment.getSandboxInitPoint());
 	}
 }

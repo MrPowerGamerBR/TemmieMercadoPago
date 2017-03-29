@@ -2,6 +2,7 @@ package com.mrpowergamerbr.temmiemercadopago;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,6 +21,8 @@ import com.mrpowergamerbr.temmiemercadopago.mp.response.AccessTokenResponse;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.ErrorResponse;
 import com.mrpowergamerbr.temmiemercadopago.mp.response.SearchResultResponse;
 import com.mrpowergamerbr.temmiemercadopago.mp.utils.AccountInfo;
+import com.mrpowergamerbr.temmiemercadopago.mp.utils.BackUrls;
+import com.mrpowergamerbr.temmiemercadopago.mp.utils.Payer;
 
 import lombok.*;
 
@@ -40,14 +43,22 @@ public class TemmieMercadoPago {
 
 	/**
 	 * Initialize a TemmieMercadoPago Client with credientials
-	 * @param clientId
-	 * @param clientToken
+	 * 
+	 * You can get your client id and client token here: https://www.mercadopago.com.br/developers/pt/api-docs/basics/authentication
+	 * 
+	 * @param clientId - MercadoPago's client id
+	 * @param clientToken - MercadoPago's client token
 	 */
 	public TemmieMercadoPago(String clientId, String clientToken) {
 		this.clientId = clientId;
 		this.clientToken = clientToken;
 	}
 
+	/**
+	 * Gets the access token response for this client id and client token
+	 * 
+	 * @return the access token response
+	 */
 	public AccessTokenResponse getAccessTokenResponse() {
 		String json = HttpRequest.post(Endpoints.MP_API_URL + "/oauth/token")
 				.part("grant_type", "client_credentials")
@@ -65,28 +76,60 @@ public class TemmieMercadoPago {
 		return response;
 	}
 
+	/**
+	 * Gets the access token for this client id and client token
+	 * 
+	 * @return the access token
+	 */
 	public String getAccessToken() {
 		return getAccessTokenResponse().getAccessToken();
 	}
 
-	public Payment generatePayment(TemmieItem... items) {
-		PaymentRequest request = new PaymentRequest();
+	/* public Payment generatePayment(TemmieItem... items) {
+		return generatePayment(null, null, items);
+	}
+	
+	public Payment generatePayment(Payer payer, TemmieItem... items) {
+		return generatePayment(payer, null, items);
+	}
+	
+	public Payment generatePayment(Payer payer, String notificationUrl, BackUrls backUrls, TemmieItem... items) {
+		return generatePayment(payer, backUrls, items);
+	} */
 
-		for (TemmieItem item : items) {
-			request.getItems().add(item);
-		}
-
+	public Payment generatePayment(PaymentRequest paymentRequest) {
 		String response = HttpRequest.post(Endpoints.MP_API_URL + "/checkout/preferences?access_token=" + getAccessToken())
 				.acceptJson()
 				.contentType("application/json")
-				.send(gson.toJson(request))
+				.send(gson.toJson(paymentRequest))
 				.body();
 
 		Payment realPayment = gson.fromJson(response, Payment.class);
 
+		System.out.println(response);
 		return realPayment;
 	}
+	
+	public Payment generatePayment(TemmieItem... items) {
+		PaymentRequest request = PaymentRequest.builder()
+				.items(Arrays.asList(items))
+				.build();
+		
+		return generatePayment(request);
+	}
 
+	public Payment generatePreapproval() {
+		String response = HttpRequest.post(Endpoints.MP_API_URL + "/preapproval/search?access_token=" + getAccessToken())
+				.acceptJson()
+				.contentType("application/json")
+				// .send(gson.toJson(request))
+				.body();
+
+		System.out.println(response);
+		
+		return null;
+	}
+	
 	public SearchResultResponse searchPayments() {
 		return searchPayments(new HashMap<String, Object>());
 	}
