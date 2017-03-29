@@ -53,7 +53,7 @@ public class Collection implements PostProcessable {
     @SerializedName("currency_id")
     @Expose
     private String currencyId;
-    @SerializedName("transaction_amount")
+    /* @SerializedName("transaction_amount")
     @Expose
     private Double transactionAmount;
     @SerializedName("total_paid_amount")
@@ -64,7 +64,7 @@ public class Collection implements PostProcessable {
     private Integer shippingCost;
     @SerializedName("account_money_amount")
     @Expose
-    private Integer accountMoneyAmount;
+    private Integer accountMoneyAmount; */
     @SerializedName("mercadopago_fee")
     @Expose
     private Object mercadopagoFee;
@@ -83,9 +83,9 @@ public class Collection implements PostProcessable {
     @SerializedName("coupon_fee")
     @Expose
     private Object couponFee;
-    @SerializedName("finance_fee")
+    /* @SerializedName("finance_fee")
     @Expose
-    private Integer financeFee;
+    private Integer financeFee; */
     @SerializedName("status")
     @Expose
     @Getter(AccessLevel.NONE)
@@ -105,9 +105,9 @@ public class Collection implements PostProcessable {
     @SerializedName("installments")
     @Expose
     private Object installments;
-    @SerializedName("installment_amount")
+    /* @SerializedName("installment_amount")
     @Expose
-    private Double installmentAmount;
+    private Double installmentAmount; */
     @SerializedName("deferred_period")
     @Expose
     private Object deferredPeriod;

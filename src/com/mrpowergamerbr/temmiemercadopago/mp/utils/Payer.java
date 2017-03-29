@@ -3,9 +3,13 @@ package com.mrpowergamerbr.temmiemercadopago.mp.utils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Builder
+@Setter
 public class Payer {
     @SerializedName("name")
     @Expose

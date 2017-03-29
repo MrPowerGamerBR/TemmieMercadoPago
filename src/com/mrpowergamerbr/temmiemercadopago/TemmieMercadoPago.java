@@ -33,7 +33,7 @@ import lombok.*;
  */
 public class TemmieMercadoPago {
 	@Getter
-	public static final Gson gson = new GsonBuilder().registerTypeAdapterFactory(new PostProcessingEnabler()).create();
+	public static final Gson gson = new GsonBuilder().serializeNulls().registerTypeAdapterFactory(new PostProcessingEnabler()).create();
 	@Getter
 	@Setter
 	private String clientId;
@@ -66,12 +66,14 @@ public class TemmieMercadoPago {
 				.part("client_secret", this.getClientToken())
 				.body();
 		
-		AccessTokenResponse response = gson.fromJson(json, AccessTokenResponse.class);
-
-		if (response.getAccessToken() == null) {
-			ErrorResponse errResponse = gson.fromJson(json, ErrorResponse.class);
+		// Check if it is an error message
+		ErrorResponse errResponse = gson.fromJson(json, ErrorResponse.class);
+		
+		if (errResponse.getMessage() != null) {
 			throw new MercadoPagoException(errResponse.getMessage());
 		}
+		
+		AccessTokenResponse response = gson.fromJson(json, AccessTokenResponse.class);
 
 		return response;
 	}
@@ -85,18 +87,6 @@ public class TemmieMercadoPago {
 		return getAccessTokenResponse().getAccessToken();
 	}
 
-	/* public Payment generatePayment(TemmieItem... items) {
-		return generatePayment(null, null, items);
-	}
-	
-	public Payment generatePayment(Payer payer, TemmieItem... items) {
-		return generatePayment(payer, null, items);
-	}
-	
-	public Payment generatePayment(Payer payer, String notificationUrl, BackUrls backUrls, TemmieItem... items) {
-		return generatePayment(payer, backUrls, items);
-	} */
-
 	public Payment generatePayment(PaymentRequest paymentRequest) {
 		String response = HttpRequest.post(Endpoints.MP_API_URL + "/checkout/preferences?access_token=" + getAccessToken())
 				.acceptJson()
@@ -104,6 +94,13 @@ public class TemmieMercadoPago {
 				.send(gson.toJson(paymentRequest))
 				.body();
 
+		// Check if it is an error message
+		ErrorResponse errResponse = gson.fromJson(response, ErrorResponse.class);
+		
+		if (errResponse.getMessage() != null) {
+			throw new MercadoPagoException(errResponse.getMessage());
+		}
+		
 		Payment realPayment = gson.fromJson(response, Payment.class);
 
 		System.out.println(response);
@@ -118,17 +115,7 @@ public class TemmieMercadoPago {
 		return generatePayment(request);
 	}
 
-	public Payment generatePreapproval() {
-		String response = HttpRequest.post(Endpoints.MP_API_URL + "/preapproval/search?access_token=" + getAccessToken())
-				.acceptJson()
-				.contentType("application/json")
-				// .send(gson.toJson(request))
-				.body();
-
-		System.out.println(response);
-		
-		return null;
-	}
+	// TODO: Subscription info
 	
 	public SearchResultResponse searchPayments() {
 		return searchPayments(new HashMap<String, Object>());
@@ -159,6 +146,7 @@ public class TemmieMercadoPago {
 				.contentType("application/json")
 				.body();
 
+		System.out.println(response);
 		return gson.fromJson(response, SearchResultResponse.class);
 	}
 

@@ -1,10 +1,14 @@
 package com.mrpowergamerbr.temmiemercadopago.mp;
 
+import com.google.gson.annotations.SerializedName;
+
 import lombok.Getter;
 
 @Getter
 public enum AutoReturnType {
+	@SerializedName("approved")
 	APPROVED("approved"),
+	@SerializedName("all")
 	ALL("all");
 	
 	private String mpStatus;

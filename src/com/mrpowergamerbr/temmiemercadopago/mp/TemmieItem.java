@@ -1,33 +1,37 @@
 
 package com.mrpowergamerbr.temmiemercadopago.mp;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class TemmieItem {
+	@SerializedName("id")
+	String id;
     @SerializedName("title")
-    @Expose
     private String title;
+    @SerializedName("description")
+    private String description;
+    @SerializedName("picture_url")
+    private String pictureUrl;
+    @SerializedName("category_id")
+    private String categoryId;
     @SerializedName("currency_id")
-    @Deprecated
-    /**
-     * Unused, returns invalid currencyId when used
-     */
     private transient String currencyId;
     @SerializedName("quantity")
-    @Expose
     private Integer quantity;
     @SerializedName("unit_price")
-    @Expose
     private double unitPrice;
     
     public TemmieItem(String title, int quantity, double unitPrice) {
-    	this(title, quantity, unitPrice, CurrencyIdentifier.BRASIL);
+    	this(title, quantity, unitPrice, "BRL");
     }
     
     public TemmieItem(String title, int quantity, double unitPrice, String currencyId) {
