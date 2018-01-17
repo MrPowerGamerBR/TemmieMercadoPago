@@ -141,7 +141,7 @@ public class Collection implements PostProcessable {
     private Object notificationUrl;
     @SerializedName("internal_metadata")
     @Expose
-    private HashMap<String, String> internalMetadata;
+    private Object internalMetadata;
     @SerializedName("transaction_order_id")
     @Expose
     private String transactionOrderId;

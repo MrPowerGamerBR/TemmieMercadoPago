@@ -40,6 +40,6 @@ public class TemmieMPTest {
 
 		TemmieMercadoPago temmie = new TemmieMercadoPago(clientId, clientToken);
 
-		temmie.generatePreapproval();
+		temmie.searchAllPayments();
 	}
 }
